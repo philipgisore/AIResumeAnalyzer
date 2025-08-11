@@ -1,6 +1,8 @@
 import { useState } from 'react'
-import NavbarPrimary from './components/NavbarPrimary';
 import { BrowserRouter } from 'react-router-dom';
+import LandingPage from './pages/LangingPage';
+import NavbarPrimary from './components/NavbarPrimary';
+import NavbarSecondary from './components/NavbarSecondary';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -8,7 +10,9 @@ function App() {
   return (
     <>
     <BrowserRouter>
-      <NavbarPrimary />
+    <NavbarPrimary />
+    <NavbarSecondary />
+      <LandingPage />
     </BrowserRouter>
       
     </>

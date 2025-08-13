@@ -33,7 +33,9 @@ export default function Hero() {
 
 
         {/* CTA Button */}
-        <button className="mx-auto flex items-center gap-2 px-6 py-3 rounded-lg text-white font-semibold text-lg shadow-lg bg-gradient-to-r from-[#3577F0] via-[#1D4DD6] to-[#1D4DD6] hover:opacity-90 transition-all ">
+        <button className="mx-auto flex items-center gap-2 px-6 py-3 rounded-lg text-white font-semibold 
+        text-lg shadow-lg bg-gradient-to-r from-[#3577F0] via-[#1D4DD6] to-[#1D4DD6] hover:from-[#387CF3] 
+        hover:to-[#1D42B4] transition-all hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(50,72,125,0.5)]">
           🚀 Upload Your Resume for Instant AI Feedback
         </button>
         

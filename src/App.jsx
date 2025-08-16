@@ -16,8 +16,6 @@ function App() {
     <>
     <Router>
       <Layout>
-        <NavbarPrimary />
-        <NavbarSecondary />
  
         <Routes>
           <Route path='/' element={<Home />} />

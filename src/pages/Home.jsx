@@ -7,7 +7,7 @@ export default function Home() {
     return (
         <>
             <Hero />
-           <section className="grid gap-6 md:grid-cols-3 mt-10 mb-7 px-4 md:px-6">
+           <section className="grid gap-6 md:grid-cols-3 sm:grid-cols-2 mt-10 mb-7 px-4 md:px-6 pt-10">
                 <FeatureCard 
                     emoji="🎯"
                     title="ATS Compatibility Analysis"

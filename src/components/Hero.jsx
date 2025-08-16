@@ -1,5 +1,5 @@
 import React from "react";
-import { Upload } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
@@ -33,11 +33,17 @@ export default function Hero() {
 
 
         {/* CTA Button */}
-        <button className="mx-auto flex items-center gap-2 px-6 py-3 rounded-lg text-white font-semibold 
-        text-lg shadow-lg bg-gradient-to-r from-[#3577F0] via-[#1D4DD6] to-[#1D4DD6] hover:from-[#387CF3] 
-        hover:to-[#1D42B4] transition-all hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(50,72,125,0.5)]">
-          🚀 Upload Your Resume for Instant AI Feedback
-        </button>
+        <Link to="/upload" className="relative mx-auto inline-flex items-center gap-2 px-6 py-4 rounded-2xl text-white font-semibold 
+            text-lg shadow-lg bg-gradient-to-r from-[#3577F0] via-[#1D4DD6] to-[#1D4DD6] hover:from-[#387CF3] 
+            hover:to-[#1D42B4] transition-all hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(50,72,125,0.5)] overflow-hidden group"
+        >
+            
+            🚀 Upload Your Resume for Instant AI Feedback
+
+            {/* Glassy sweep light */}
+            <span className="pointer-events-none absolute inset-0 before:absolute before:top-0 before:left-[-75%] before:w-[70%] before:h-full before:bg-white/7 before:skew-x-[-20deg] before:transition-transform before:duration-300 group-hover:before:translate-x-[250%] group-hover:before:duration-700 border border-transparent"></span>
+        </Link>
+
         
       </div>
     </section>

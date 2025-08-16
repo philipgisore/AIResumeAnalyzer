@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 export default function NavbarPrimary({currentPage, onPageChange}) {
   return (
-    <div className="px-4 py-2">
+    <div className="px-4 py-2 pt-4">
       <nav className="relative z-50 flex items-center justify-between py-4 px-6 
         bg-gradient-to-r  from-[#172E5C] via-[#1F355B] to-[#26959] shadow-[0_0_12px_rgba(255,255,255,0.08)] 
         shadow-[inset_0_0_10px_rgba(255,255,255,0.05)]

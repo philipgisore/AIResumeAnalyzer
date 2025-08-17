@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function NavbarSecondary() {
-    console.log("NavbarSecondary rendered");
     const location = useLocation();
     const navItems = [
         { name: 'Home', path: '/' },

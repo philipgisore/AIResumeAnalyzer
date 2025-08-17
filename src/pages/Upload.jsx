@@ -1,57 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { saveUpload } from '../utils/storage';
 
+export default function ResumeUpload() {
+        const [resumeFile, setResumeFile] = useState(null);
+    const [resumeBase64, setResumeBase64] = useState(null);
+    const [jobDescription, setJobDescription] = useState('');
 
-export default function Upload() {
-    const [selectedFile, setSelectedFile] = useState(null);
+    // Load from localStorage when the component mounts
+    useEffect(() => {
+        const storedFileName = localStorage.getItem("resumeFileName");
+        const storedFileContent = localStorage.getItem("resumeFileContent");
+        const storedDesc = localStorage.getItem("jobDescription");
 
-    const handleFileChange = (e) => {
-        const file =e.target.files[0];
-        setSelectedFile(file);
+        if (storedFileName) setResumeFile(storedFileName);
+        if (storedFileContent) setResumeBase64(storedFileContent);
+        if (storedDesc) setJobDescription(storedDesc);
+    }, []);
+
+    // Save to localStorage whenever values change
+    useEffect(() => {
+        if (resumeFile) localStorage.setItem("resumeFileName", resumeFile);
+        if (resumeBase64) localStorage.setItem("resumeFileContent", resumeBase64);
+        if (jobDescription) localStorage.setItem("jobDescription", jobDescription);
+    }, [resumeFile, resumeBase64, jobDescription]);
+
+    // Convert file to Base64 string
+    const fileToBase64 = (file) => 
+        new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+        });
+
+    // Handle file upload
+    const handleFileChange = async (e) => {
+        const file = e.target.files[0];
+        if (file && file.size <= 10 * 1024 * 1024) {
+            const base64 = await fileToBase64(file);
+            setResumeFile(file.name);
+            setResumeBase64(base64);
+            saveUpload(file); // store metadata
+        } else {
+            alert("File too large. Max 10MB");
+        }
     };
-    const handleUpload = () => {
-        if(!selectedFile) {
-            alert("Please select a file first!");
+
+    // Mock AI integration later
+    const handleSubmit = () => {
+        if (!resumeBase64 || !jobDescription) {
+            alert("Please upload a resume and enter a job description");
             return;
         }
 
-        //Create a new upload entry
-        const newUpload = {
-            fileName: selectedFile.name,
-            date: new Date().toLocaleString(),
-        };
-        
-        //Get existing uploads from localStorage
-        const existingUploads = JSON.parse(localStorage.GetItem("uloads")) || [];
+        //Save to storage.js for Dashboard to display
+        saveAnalysis({
+            id: Date.now(),
+            title: resumeFile,
+            data: {summary: jobDescription},
+        });
 
-        //Add a new upload at the start 
-        const updateUploads = [newUpload, ...existingUploads];
-
-        //Save back to the LocalStorage
-        localeStorage.setItem("uploads", JSon.stringify(updatedUploads));
-
-        //Reset file Input
-        setSelectedFile(null);
-        document.getElementById("resumeInput").value = "";
-
-        alert("Resume uploaded successfuly!");
+        console.log("Saved analysis:", {
+            resumeFile,
+            resumeBase64,
+            jobDescription,
+        })
     };
 
-    return (
-       <div className="p-6 bg-white shadow-md rounded-lg">
-            <h2 className="text-2xl font-semibold mb-4">Upload Your Resume</h2>
-            <input 
-                id="resumeInput"
-                type="file"
-                accept=".pdf, .doc, .docx"
-                onChange={handleFileChange}
-                className="mb-4 block w-full border border-gray-300 rounded-lg p-2"
-            />
-            <button 
-                onClick={handleUpload}
-                className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-            >
-                Upload
-            </button>
-       </div> 
-    );
 }

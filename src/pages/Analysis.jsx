@@ -1,47 +1,57 @@
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-export default function Analysis() {
-  const [result, setResult] = useState(null);
+export default function UploadSection() {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const savedResult = localStorage.getItem("analysisResult");
-    if (savedResult) {
-      setResult(JSON.parse(savedResult));
+  const handleAIAnalysis = async () => {
+    setLoading(true);
+
+    try {
+      // ✅ Mock AI response
+      const mockAIResponse = {
+        atsScore: "85%",
+        strengths: [
+          "Strong technical background",
+          "Clear project achievements",
+          "Good leadership experience",
+        ],
+        opportunities: [
+          "Add more metrics to achievements",
+          "Include certifications",
+          "Optimize resume length",
+        ],
+        keywordAnalysis: {
+          matched: ["JavaScript", "React", "Node.js"],
+          missing: ["AWS", "Docker", "Kubernetes"],
+        },
+      };
+
+      // Save mock response to localStorage
+      localStorage.setItem("analysisResult", JSON.stringify(mockAIResponse));
+
+      // Navigate to analysis page
+      navigate("/analysis");
+    } catch (error) {
+      console.error("AI analysis failed", error);
+      alert("Something went wrong. Try again.");
+    } finally {
+      setLoading(false);
     }
-  }, []);
-
-  if (!result) {
-    return (
-      <p className="text-center text-gray-400 mt-10">
-        No analysis found. Please upload a resume first.
-      </p>
-    );
-  }
+  };
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-white mb-6">📊 Resume Analysis</h2>
-
-      {/* Analysis Summary */}
-      <div className="bg-gradient-to-br from-[#173465] via-[#244865] to-[#2F3E6D] p-6 rounded-2xl shadow-lg">
-        <h3 className="text-lg font-semibold text-blue-300 mb-3">
-          Analysis Summary
-        </h3>
-        <p className="text-white/80">{result.summary}</p>
-      </div>
-
-      {/* Optimized Resume */}
-      <div className="bg-gradient-to-br from-[#1C4278] via-[#1F476A] to-[#343C74] p-6 rounded-2xl shadow-lg">
-        <h3 className="text-lg font-semibold text-blue-300 mb-3">
-          Optimized Resume
-        </h3>
-        <pre className="text-white/80 whitespace-pre-wrap">
-          {result.optimizedResume}
-        </pre>
-      </div>
-    </div>
+    <button
+      onClick={handleAIAnalysis}
+      disabled={loading}
+      className="w-full mt-6 py-3 px-6 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold shadow-lg hover:opacity-90 transition disabled:opacity-50"
+    >
+      {loading ? "Analyzing..." : "🚀 Begin AI Analysis"}
+    </button>
   );
 }
+
 
 
 

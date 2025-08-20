@@ -14,20 +14,28 @@ export default function UploadSection({ resumeFile, jobDescription }) {
     setLoading(true);
 
     try {
-      // Simulated AI API call (replace with your backend/AI endpoint)
-      const response = await fetch("http://localhost:5000/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          resume: resumeFile,
-          jobDescription: jobDescription, // if you have it
-        }),
-      });
-
-      const data = await response.json();
+      //Mock AI response
+      const mockAIResponse = {
+        atsScore: "85%",
+        strengths: [
+          "Strong technical background",
+          "Clear Projects achievements",
+          "Good leadership experience",
+        ],
+        opportunities: [
+          "Add more metrics to achievements",
+          "Clear project achievements",
+          "Good Leadership experience",
+        ],
+        keywordAnalysis: {
+          matched: ["JavaScript", "React", "Node.js"],
+          missing: ["AWS", "Docker", "Kubernetes"],
+        },
+      };
+      
 
       // Save to localStorage or context so Analysis page can read it
-      localStorage.setItem("analysisResult", JSON.stringify(data));
+      localStorage.setItem("analysisResult", JSON.stringify(mockAIResponse));
 
       // Navigate to analysis page
       navigate("/analysis");

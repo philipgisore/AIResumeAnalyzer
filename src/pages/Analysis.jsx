@@ -1,54 +1,47 @@
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { div } from "framer-motion/client";
+import { useState, useEffect } from "react";
 
-export default function UploadSection() {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+export default function Analysis() {
+  const [result, setResult] = useState(null);
 
-  const handleAIAnalysis = async () => {
-    setLoading(true);
-
-    try {
-      // ✅ Mock AI response
-      const mockAIResponse = {
-        atsScore: "85%",
-        strengths: [
-          "Strong technical background",
-          "Clear project achievements",
-          "Good leadership experience",
-        ],
-        opportunities: [
-          "Add more metrics to achievements",
-          "Include certifications",
-          "Optimize resume length",
-        ],
-        keywordAnalysis: {
-          matched: ["JavaScript", "React", "Node.js"],
-          missing: ["AWS", "Docker", "Kubernetes"],
-        },
-      };
-
-      // Save mock response to localStorage
-      localStorage.setItem("analysisResult", JSON.stringify(mockAIResponse));
-
-      // Navigate to analysis page
-      navigate("/analysis");
-    } catch (error) {
-      console.error("AI analysis failed", error);
-      alert("Something went wrong. Try again.");
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    const savedResult = localStorage.getItem("analysisResult");
+    if (savedResult) {
+      setResult(JSON.parse(savedResult))
     }
-  };
+  }, []);
+
+  if (!result) {
+    return <p className="text-center text-gray-400 mt-10">
+      No analysis found plaese upload a resume first.
+    </p>;
+  }
 
   return (
-    <button
-      onClick={handleAIAnalysis}
-      disabled={loading}
-      className="w-full mt-6 py-3 px-6 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold shadow-lg hover:opacity-90 transition disabled:opacity-50"
-    >
-      {loading ? "Analyzing..." : "🚀 Begin AI Analysis"}
-    </button>
+    <div className="space-y-6 pt-16 P-6">
+      {/* ATS Score */}
+      <div className="bg-gradient-to-br from-[#173465] to-[#2F3E6D] p-6 rounded-2xl shadow-lg">
+        <h2 className="text-xl font-bold text-blue-300">📊 ATS Compatibitily Score</h2>
+        <p className="text-white/80 text-lg">{result.atsScore}</p>
+      </div>
+
+      {/* Strengths */}
+      <div className="bg-gradient-to-br from-[#173465] to-[#343C74] p-6 rounded-xl shadow-lg">
+        <h2 className="text-lg font-bold text-white">💪 Perfomance Analysis </h2>
+        <p className="text-green-300 leading-relaxed mt-4">✅ Key Strengths</p>
+        <ul className="list-disc list-inside text-white/80 mt-2">
+          {result.strengths.map((item, i) => <li key={i} className=" border border-white/10 bg-gradient-to-br from-[#164461] via-[#184164]to-[#273E66] rounded-xl p-4 mt-4" >{item}</li>)}
+        </ul>
+
+        {/* Opportinities */}
+        <h2 className="text-[#F6A2A3] mt-5 font-bold ">Optimization opportunities</h2>
+        <ul className="list-disc list-inside text-[#F6A2A3] mt-2">
+          {result.opportunities.map((item, i) => <li key={i} className="border border-[#4C324B] bg-gradient-to-br from-[#2D3551] via-[#303C53] to-[#3C355F] rounded-xl p-4 mt-4">{item}</li>)}
+        </ul>
+      </div>
+
+
+    </div>
   );
 }
 

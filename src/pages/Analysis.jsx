@@ -18,7 +18,7 @@ export default function Analysis() {
   }
 
   return (
-    <div className="space-y-6 pt-16 P-6">
+    <div className="space-y-6 pt-16 ">
       {/* ATS Score */}
       <div className="bg-gradient-to-br from-[#173465] to-[#2F3E6D] p-6 rounded-2xl shadow-lg">
         <h2 className="text-xl font-bold text-blue-300">📊 ATS Compatibitily Score</h2>
@@ -40,7 +40,7 @@ export default function Analysis() {
         </ul>
       </div>
 
-
+      <button className="rounded-xl w-fit text-white">Begin Analysis</button>
     </div>
   );
 }

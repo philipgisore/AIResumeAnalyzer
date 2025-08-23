@@ -21,7 +21,7 @@ const Dashboard = () => {
                 <p className='text-blue-100 text-lg mb-6'>Your professional resume optimization dashboard</p>
                 <Link 
                     to="/upload" 
-                    className='bg-blue-500 hover:bg-blue-400 transition-colors px-6 py-3 rounded-lg font-semibold relative flex 
+                    className='bg-blue-500 hover:bg-blue-400 transition-colors px-6 py-3 font-semibold relative flex 
                         items-center justify-center gap-2 rounded-xl text-white font-semibold mx-auto w-fit' 
                 >
                     <FileText size={20} />

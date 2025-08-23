@@ -16,8 +16,9 @@ export default function UploadSection({ resumeFile, jobDescription }) {
     try {
       //Mock AI response
       const mockAIResponse = {
-        atsScore: "85%",
-        strengths: [
+        atsScore: 92,
+        perfomance: {
+           strengths: [
           "Strong technical background",
           "Clear Projects achievements",
           "Good leadership experience",
@@ -26,8 +27,9 @@ export default function UploadSection({ resumeFile, jobDescription }) {
           "Add more metrics to achievements",
           "Clear project achievements",
           "Good Leadership experience",
-        ],
-        keywordAnalysis: {
+        ]    
+        },
+       keywordAnalysis: {
           matched: ["JavaScript", "React", "Node.js"],
           missing: ["AWS", "Docker", "Kubernetes"],
         },

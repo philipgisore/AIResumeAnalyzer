@@ -16,8 +16,8 @@ export default function UploadSection({ resumeFile, jobDescription }) {
     try {
       //Mock AI response
       const mockAIResponse = {
-        atsScore: 92,
-        perfomance: {
+        atsScore: 85,
+        performance: {
            strengths: [
           "Strong technical background",
           "Clear Projects achievements",

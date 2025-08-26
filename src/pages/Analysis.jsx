@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ATSScoreCard from "../components/ATSScoreCard";
+import EnhancedResume from "../components/EnhancedResume";
 
 // Clamp ATS score 0–100
 const toScore = (score) => {
@@ -57,7 +58,7 @@ export default function Analysis() {
         <ATSScoreCard score={result.atsScore} />
 
         {/* Performance */}
-        <div className="max-w-5xl bg-gradient-to-br from-[#173465] via-[#244865] to-[#2F3E6D] rounded-[24px] p-6 sm:p-10 shadow-xl">
+        <div className="w-full mx-auto max-w-5xl bg-gradient-to-br from-[#173465] via-[#244865] to-[#2F3E6D] rounded-[24px] p-6 sm:p-10 shadow-xl text-white">
           <h2 className="text-lg font-bold text-white">💪 Performance Analysis</h2>
 
           <p className="text-green-300 leading-relaxed mt-4">✅ Key Strengths</p>
@@ -82,28 +83,49 @@ export default function Analysis() {
 
         {/* Keyword Analysis */}
         {result.keywordAnalysis && (
-          <div className="max-w-5xl bg-gradient-to-br from-[#2E3456] via-[#3B4465] to-[#4A3F75] rounded-[24px] p-6 sm:p-10 shadow-xl">
-            <h2 className="text-lg font-bold text-white">🔑 Keyword Analysis</h2>
+          <div className="w-ull mx-auto max-w-5xl bg-gradient-to-br from-[#173465] via-[#244865] to-[#2F3E6D] rounded-[24px] p-6 sm:p-10 shadow-xl">
+            {/* Title */}
+            <h className="text-3xl font-bold text-white flex items-center gap-2">🎯 Advanced Keyword Analysis</h>
 
-            <p className="text-green-300 leading-relaxed mt-4">✅ Matched Keywords</p>
-            <ul className="list-disc list-inside text-white/80 mt-2">
+            {/* Matched Keywords */}
+            <p className="text-green-400 font-medium mt-6 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-green-400" />
+              Matched keywords ({result.keywordAnalysis.matched.length})
+            </p>
+            <div className="flex flex-wrap gap-3 mt-3">
               {result.keywordAnalysis.matched.map((kw, i) => (
-                <li key={i}>{kw}</li>
+                <span 
+                  key={i}
+                  className="px-4 py-2 rounded-full bg-green-600/30 text-green-200 font-medium text-sm shdow-sm"
+                >
+                  {kw}
+                </span>
               ))}
-            </ul>
-
-            <p className="text-red-300 leading-relaxed mt-4">❌ Missing Keywords</p>
-            <ul className="list-disc list-inside text-red-300 mt-2">
+            </div>
+            {/*Missing keywords */}
+            <p className="text-red-400 font-medium mt-6 flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-red-400"/>
+              Missing High-Impact keywords ({result.keywordAnalysis.missing.length})
+            </p>
+            <div className="flex flex-wrap gap-3 mt-3">
               {result.keywordAnalysis.missing.map((kw, i) => (
-                <li key={i}>{kw}</li>
+                <span
+                  key={i}
+                  className="px-4 py-2 rounded-full bg-red-600/30 text-red-300 font-medium text-sm shadow-sm"
+                >
+                  {kw}
+                </span>
               ))}
-            </ul>
+            </div>
+
+            {/* AI Insight box */}
+            <div className="mt-6 bg-blue-900/40 text-blue-200 text-sm rounded-xl p-4 border border-blue-700/40">
+              💡 <span className="font-semibold text-blue-100">AI Insight:</span> Adding these keywords could increase your ATS score to <span className="font-bold text-white">98/100</span> and improve match rate by <span className="font-bold text-white">23%</span>.
+            </div>
           </div>
         )}
 
-        <button className="rounded-xl w-fit text-white bg-blue-500 hover:bg-blue-400 flex items-center justify-center relative py-3 px-4 mx-auto mb-6">
-          Begin AI Analysis
-        </button>
+        <EnhancedResume />
       </div>
     </section>
   );

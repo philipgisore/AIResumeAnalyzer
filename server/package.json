@@ -1,0 +1,25 @@
+{
+  "name": "resume-analyzer-server",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "description": "Backend server for AI Resume Analyzer project",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Philip Gisore",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.19.2",
+    "openai": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
+

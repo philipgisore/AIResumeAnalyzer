@@ -46,7 +46,7 @@ export default function Analysis() {
   if (!result) {
     return (
       <p className="text-center text-gray-400 mt-10">
-        No analysis found please upload a resume first.
+        No analysis found. Please upload a resume first.
       </p>
     );
   }
@@ -83,9 +83,11 @@ export default function Analysis() {
 
         {/* Keyword Analysis */}
         {result.keywordAnalysis && (
-          <div className="w-ull mx-auto max-w-5xl bg-gradient-to-br from-[#173465] via-[#244865] to-[#2F3E6D] rounded-[24px] p-6 sm:p-10 shadow-xl">
+          <div className="w-full mx-auto max-w-5xl bg-gradient-to-br from-[#173465] via-[#244865] to-[#2F3E6D] rounded-[24px] p-6 sm:p-10 shadow-xl">
             {/* Title */}
-            <h className="text-3xl font-bold text-white flex items-center gap-2">🎯 Advanced Keyword Analysis</h>
+            <h2 className="text-3xl font-bold text-white flex items-center gap-2">
+              🎯 Advanced Keyword Analysis
+            </h2>
 
             {/* Matched Keywords */}
             <p className="text-green-400 font-medium mt-6 flex items-center gap-2">
@@ -96,15 +98,16 @@ export default function Analysis() {
               {result.keywordAnalysis.matched.map((kw, i) => (
                 <span 
                   key={i}
-                  className="px-4 py-2 rounded-full bg-green-600/30 text-green-200 font-medium text-sm shdow-sm"
+                  className="px-4 py-2 rounded-full bg-green-600/30 text-green-200 font-medium text-sm shadow-sm"
                 >
                   {kw}
                 </span>
               ))}
             </div>
-            {/*Missing keywords */}
+
+            {/* Missing keywords */}
             <p className="text-red-400 font-medium mt-6 flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-red-400"/>
+              <span className="h-2 w-2 rounded-full bg-red-400" />
               Missing High-Impact keywords ({result.keywordAnalysis.missing.length})
             </p>
             <div className="flex flex-wrap gap-3 mt-3">
@@ -125,14 +128,9 @@ export default function Analysis() {
           </div>
         )}
 
+        {/* Enhanced Resume Component */}
         <EnhancedResume />
       </div>
     </section>
   );
 }
-
-
-
-
-
-

@@ -10,6 +10,7 @@ export default function ResumeUpload() {
   const [dragActive, setDragActive] = useState(false);
 
   // Load saved data from localStorage
+  // Load saved data from localStorage
   useEffect(() => {
     const storedFileName = localStorage.getItem("resumeFileName");
     const storedFileContent = localStorage.getItem("resumeFileContent");
@@ -17,7 +18,7 @@ export default function ResumeUpload() {
 
     if (storedFileName) setResumeFile(storedFileName);
     if (storedFileContent) setResumeBase64(storedFileContent);
-    if (storedDesc) setJobDescription(storedDesc);
+    if (storedDesc && storedDesc !== "h") setJobDescription(storedDesc); // Added check for "h"
   }, []);
 
   // Save data to localStorage whenever values change
@@ -165,29 +166,29 @@ export default function ResumeUpload() {
         </div>
 
         {/* Job Description Section */}
-        <div className="flex items-center gap-2 mb-3 mt-10">
-          <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
-            <Briefcase className="w-4 h-4 text-white" />
-          </div>
-          <h3 className="text-white font-semibold text-lg">
-            Target Job Description
-          </h3>
+      <div className="flex items-center gap-2 mb-3 mt-10">
+        <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+          <Briefcase className="w-4 h-4 text-white" />
         </div>
+        <h3 className="text-white font-semibold text-lg">
+          Target Job Description
+        </h3>
+      </div>
 
-        <p className="font-light text-white/80 mb-4">
-          Paste the complete job description for AI-powered keyword analysis and
-          role-specific optimization recommendations.
-        </p>
+      <p className="font-light text-white/80 mb-4">
+        Paste the complete job description for AI-powered keyword analysis and
+        role-specific optimization recommendations.
+      </p>
 
-        <textarea
-          value={jobDescription}
-          onChange={(e) => setJobDescription(e.target.value)}
-          placeholder="Paste the complete job description here..."
-          className="w-full mt-3 p-4 border border-white/10 rounded-xl text-white font-light font-sans bg-transparent
-            focus:outline-none focus:ring-2 focus:ring-white/10 hover:focus:border-white/30
-            placeholder:text-gray-400 text-sm sm:text-base"
-          rows="9"
-        />
+      <textarea
+        value={jobDescription}
+        onChange={(e) => setJobDescription(e.target.value)}
+        placeholder="Paste the complete job description here..."
+        className="w-full mt-3 p-4 border border-white/10 rounded-xl text-white font-light font-sans bg-transparent
+          focus:outline-none focus:ring-2 focus:ring-white/10 focus:border-white/30 hover:border-white/20
+          placeholder:text-gray-400 text-sm sm:text-base"
+        rows="9"
+      />
 
         {/* Begin AI analysis button */}
         <BeginAnalysis resumeFile={resumeFile} jobDescription={jobDescription} />

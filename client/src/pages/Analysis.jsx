@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ATSScoreCard from "../components/ATSScoreCard";
 import EnhancedResume from "../components/EnhancedResume";
+import { jsPDF } from "jspdf";
 
 // Clamp ATS score 0–100
 const toScore = (score) => {
@@ -25,6 +26,20 @@ const normalizeResult = (raw) => {
     performance: { strengths, opportunities },
     keywordAnalysis: raw?.keywordAnalysis ?? null,
   };
+};
+
+// Export to PDF — only capture analysis content
+const exportAsPDF = () => {
+  const resumeSection = document.getElementById("analysis-section"); // use a unique ID
+  const doc = new jsPDF("p", "pt", "a4");
+
+  doc.html(resumeSection, {
+    callback: function (pdf) {
+      pdf.save("ATS_Analysis_Report.pdf");
+    },
+    margin: [40, 40, 40, 40],
+    html2canvas: { scale: 0.6 },
+  });
 };
 
 export default function Analysis() {
@@ -53,7 +68,9 @@ export default function Analysis() {
 
   return (
     <section className="w-full justify-center items-center py-12 px-4">
-      <div className="space-y-6 pt-8">
+
+      {/* 🔹 Analysis Section (Captured in PDF) */}
+      <div id="analysis-section" className="space-y-6 pt-8">
         {/* ATS Score */}
         <ATSScoreCard score={result.atsScore} />
 
@@ -84,7 +101,6 @@ export default function Analysis() {
         {/* Keyword Analysis */}
         {result.keywordAnalysis && (
           <div className="w-full mx-auto max-w-5xl bg-gradient-to-br from-[#173465] via-[#244865] to-[#2F3E6D] rounded-[24px] p-6 sm:p-10 shadow-xl">
-            {/* Title */}
             <h2 className="text-3xl font-bold text-white flex items-center gap-2">
               🎯 Advanced Keyword Analysis
             </h2>
@@ -127,10 +143,24 @@ export default function Analysis() {
             </div>
           </div>
         )}
-
-        {/* Enhanced Resume Component */}
-        <EnhancedResume />
       </div>
+
+      {/* 🔹 Enhanced Resume (not included in PDF) */}
+            <EnhancedResume />
+      {/* 🔹 Export Button (Outside of PDF Capture Area) */}
+      <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+        <button
+          onClick={exportAsPDF}
+          className="relative mx-auto inline-flex items-center gap-2 px-6 py-4 rounded-2xl text-white font-semibold 
+            text-lg shadow-lg bg-gradient-to-r from-[#3577F0] via-[#1D4DD6] to-[#1D4DD6] hover:from-[#387CF3] 
+            hover:to-[#1D42B4] transition-all hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(50,72,125,0.5)] overflow-hidden group"
+        >
+          <span role="img" aria-label="pdf">📘</span>
+          Export as PDF
+        </button>
+      </div>
+
+      
     </section>
   );
 }

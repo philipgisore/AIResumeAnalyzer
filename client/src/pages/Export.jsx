@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { FileText, File, ArrowLeft } from "lucide-react";
+import { FileText, File, ArrowLeft, BarChart3 } from "lucide-react";
 import { getAnalysisById } from "../utils/storage";
 
 export default function Export() {
@@ -26,7 +26,7 @@ export default function Export() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-10 text-white">
+    <div className="max-w-4xl mx-auto px-6 py-10 pt-20 text-white">
       
       {/* Back */}
       <button
@@ -46,29 +46,28 @@ export default function Export() {
         </div>
       )}
 
+      <div className=""></div>
+  
       {/* Header */}
       <div className="w-full max-w-5xl bg-gradient-to-br from-[#173465] via-[#244865] to-[#2F3E6D] rounded-[24px] p-6 sm:p-10 shadow-xl">
         <div>
-          <h1 className="text-3xl font-bold mb-2">
+          <h1 className="text-3xl font-bold mb-4">
             📁 Export Your Optimized Resume
           </h1>
           <p className="text-blue-100">
             Choose your preferred export format and apply AI optimizations
         </p>
         </div>
-      </div>
-      
-
-      {/* Export Options */}
-      <div className="space-y-6">
+        {/* Export Options */}
+      <div className="space-y-6 mt-6">
         
         {/* PDF */}
         <div
           onClick={() => handleExport("PDF")}
           className="cursor-pointer bg-gradient-to-r from-slate-800 to-slate-700 
-                     hover:scale-[1.02] transition rounded-2xl p-6 border border-white/10"
+                     hover:scale-[1.03] transition rounded-2xl p-8 border border-white/10"
         >
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 mt-4">
             <FileText size={42} className="text-blue-400" />
             <div>
               <h3 className="text-xl font-semibold">Professional PDF</h3>
@@ -78,12 +77,13 @@ export default function Export() {
             </div>
           </div>
         </div>
-
+      </div>
+      
         {/* DOCX */}
         <div
           onClick={() => handleExport("DOCX")}
           className="cursor-pointer bg-gradient-to-r from-slate-800 to-slate-700 
-                     hover:scale-[1.02] transition rounded-2xl p-6 border border-white/10"
+                     hover:scale-[1.02] transition rounded-2xl p-6 border border-white/10 mt-6"
         >
           <div className="flex items-center gap-4">
             <File size={42} className="text-green-400" />
@@ -95,7 +95,83 @@ export default function Export() {
             </div>
           </div>
         </div>
+      
+          {/* ANALYSIS REPORT */}
+    <div
+      onClick={() => handleExport("ANALYSIS_REPORT")}
+      className="
+        cursor-pointer
+        bg-gradient-to-r from-slate-800 to-slate-700
+        hover:scale-[1.03]
+        transition-all duration-300
+        rounded-2xl p-8 border border-white/10 mt-6
+      "
+    >
+      <div className="flex items-center gap-4">
+        <BarChart3 size={42} className="text-purple-400" />
+        <div>
+          <h3 className="text-xl font-semibold">Analysis Report</h3>
+          <p className="text-slate-300 text-sm">
+            Comprehensive PDF report with insights and recommendations
+          </p>
+        </div>
       </div>
+    </div>
+{/* AI OPTIMIZATIONS */}
+    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mt-10">
+      <h3 className="text-lg font-semibold mb-4">
+        ✅ AI Optimizations Applied
+      </h3>
+
+      <ul className="space-y-2 text-sm text-slate-300 list-disc list-inside">
+        <li>3 high-impact keywords strategically integrated</li>
+        <li>Professional formatting optimized for ATS parsing</li>
+        <li>Enhanced technical skills section prominence</li>
+        <li>Quantified achievements with stronger action verbs</li>
+        <li>Industry-standard section headers and structure</li>
+      </ul>
+    </div>
+          {/* ACTION BUTTONS */}
+    <div className="flex flex-col items-center gap-4 mt-10">
+
+      <button
+        onClick={() => handleExport("PDF")}
+        className="
+          bg-gradient-to-r from-blue-500 to-blue-600
+          hover:from-blue-600 hover:to-blue-700
+          text-white font-semibold
+          px-8 py-3 rounded-full
+          transition shadow-lg
+        "
+      >
+        📥 Download Optimized Resume
+      </button>
+
+      <button
+        className="
+          bg-white/10 hover:bg-white/15
+          text-white px-6 py-3 rounded-full
+          transition
+        "
+      >
+        📄 Get Full Analysis Report
+      </button>
+
+      <button
+        onClick={() => navigate("/")}
+        className="
+          bg-white/5 hover:bg-white/10
+          text-white px-6 py-3 rounded-full
+          transition
+        "
+      >
+        🔄 Analyze New Resume
+      </button>
+
+    </div>
+      </div>
+      
+
     </div>
   );
 }

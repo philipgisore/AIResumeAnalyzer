@@ -65,7 +65,7 @@ export default function Export() {
         <div
           onClick={() => handleExport("PDF")}
           className="cursor-pointer bg-gradient-to-r from-slate-800 to-slate-700 
-                     hover:scale-[1.03] transition rounded-2xl p-8 border border-white/10"
+                     hover:translate-y-1 transition rounded-2xl p-8 border border-white/10"
         >
           <div className="flex items-center gap-4 mt-4">
             <FileText size={42} className="text-blue-400" />
@@ -83,7 +83,7 @@ export default function Export() {
         <div
           onClick={() => handleExport("DOCX")}
           className="cursor-pointer bg-gradient-to-r from-slate-800 to-slate-700 
-                     hover:scale-[1.02] transition rounded-2xl p-6 border border-white/10 mt-6"
+                     hover:translate-y-1 transition rounded-2xl p-8 border border-white/10 mt-6"
         >
           <div className="flex items-center gap-4">
             <File size={42} className="text-green-400" />
@@ -102,7 +102,7 @@ export default function Export() {
       className="
         cursor-pointer
         bg-gradient-to-r from-slate-800 to-slate-700
-        hover:scale-[1.03]
+        hover:translate-y-1
         transition-all duration-300
         rounded-2xl p-8 border border-white/10 mt-6
       "
@@ -137,12 +137,22 @@ export default function Export() {
       <button
         onClick={() => handleExport("PDF")}
         className="
-          bg-gradient-to-r from-blue-500 to-blue-600
-          hover:from-blue-600 hover:to-blue-700
-          text-white font-semibold
-          px-8 py-3 rounded-full
-          transition shadow-lg
+          relative
+          p-6 py-3
+          rounded-full
+          font-semibold
+          text-white
+          bg-gradient-to-br from-[#173465] via-[#244865] to-[#2F3E6D]
+
+          border border-white/10 mb-4
+          shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]
+
+          hover:translate-y-1
+
+          hover:shadow-lg
+          transition-all duration-300
         "
+
       >
         📥 Download Optimized Resume
       </button>
@@ -150,8 +160,10 @@ export default function Export() {
       <button
         className="
           bg-white/10 hover:bg-white/15
-          text-white px-6 py-3 rounded-full
+          text-white py-3 p-6 rounded-full
           transition
+          hover:translate-y-1
+          border border-white/10 mb-4
         "
       >
         📄 Get Full Analysis Report
@@ -160,9 +172,11 @@ export default function Export() {
       <button
         onClick={() => navigate("/")}
         className="
-          bg-white/5 hover:bg-white/10
+          bg-white/10 hover:bg-white/10
           text-white px-6 py-3 rounded-full
           transition
+          hover:translate-y-1
+          border border-white/10 
         "
       >
         🔄 Analyze New Resume

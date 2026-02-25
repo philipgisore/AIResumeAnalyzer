@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import Upload from './pages/Upload';
 import Analysis from './pages/Analysis';
 import Export from './pages/Export';
+import SignIn from './pages/SignIn';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +24,7 @@ function App() {
           <Route path='/upload' element={<Upload />} />
           <Route path='/analysis' element={<Analysis />} />
           <Route path='/export' element={<Export />} />
+          <Route path='/SignIn' element={<SignIn />} />
         </Routes>
       </Layout>
       

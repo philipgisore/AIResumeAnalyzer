@@ -45,4 +45,4 @@ Thumbs.db
 # Optional: Lock files (uncomment if you don't want to track them)
 # package-lock.json
 # client/package-lock.json
-# server/package-lock.json
+# server/package-lock.jsonnode_modules/

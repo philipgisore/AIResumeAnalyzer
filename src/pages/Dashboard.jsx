@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FileText } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { auth } from "../firebase";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -29,7 +30,7 @@ const Dashboard = () => {
       >
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-2 mt-2">
-            Welcome back, {user.name} 👋
+            Welcome back, {user.displayName?.split(" ")[0] || user.email} 👋
           </h1>
 
           <p className="text-blue-100 text-lg mb-6">

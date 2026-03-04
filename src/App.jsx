@@ -9,6 +9,7 @@ import Upload from './pages/Upload';
 import Analysis from './pages/Analysis';
 import Export from './pages/Export';
 import SignIn from './pages/SignIn';
+import GetStarted from './pages/GetStarted';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +26,7 @@ function App() {
           <Route path='/analysis' element={<Analysis />} />
           <Route path='/export' element={<Export />} />
           <Route path='/SignIn' element={<SignIn />} />
+          <Route path="/get-started" element={<GetStarted />} />
         </Routes>
       </Layout>
       

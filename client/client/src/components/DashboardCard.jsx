@@ -1,0 +1,1 @@
+export default function DashboardCard({ id, title, description }) {}

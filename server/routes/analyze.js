@@ -4,7 +4,7 @@ import { analyzeResumeText } from "../utils/analyzer.js";
 const router = express.Router();
 
 // POST /api/analyze
-router.post("/", async (req, res) => {
+router.post("/analyze", async (req, res) => {
   try {
     const { text } = req.body;
 

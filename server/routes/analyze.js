@@ -8,15 +8,26 @@ router.post("/analyze", async (req, res) => {
   try {
     const { text } = req.body;
 
-    if (!text) {
-      return res.status(400).json({ error: "No resume text provided" });
+    if (!text || text.trim() === "") {
+      return res.status(400).json({
+        error: "Resume text is required",
+      });
     }
 
     const analysis = await analyzeResumeText(text);
-    res.json({ analysis });
-  } catch (err) {
-    console.error("Error analyzing resume:", err);
-    res.status(500).json({ error: "Failed to analyze resume" });
+
+    res.status(200).json({
+      success: true,
+      analysis,
+    });
+
+  } catch (error) {
+    console.error("Resume analysis error:", error);
+
+    res.status(500).json({
+      success: false,
+      error: "Failed to analyze resume",
+    });
   }
 });
 

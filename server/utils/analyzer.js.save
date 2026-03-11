@@ -1,0 +1,28 @@
+import Anthropic from "@anthropic-ai/sdk";
+import dotenv from "dotenv";
+dotenv.config();
+
+const client = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY
+});
+
+export async function analyzeResumeText(text) {
+  const message = await client.messages.create({
+    model: "claude-opus-4-6",
+    max_tokens: 1024,
+    messages: [
+      {
+        role: "user",
+        content: `You are a professional resume reviewer and ATS expert. Analyze this resume and provide:
+1. An ATS score out of 100
+2. Key strengths
+3. Areas for improvement
+4. Missing keywords
+
+Resume${text}`
+      }
+    ]
+  });
+
+  return message.content[0].text;
+}
